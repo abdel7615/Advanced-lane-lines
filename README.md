@@ -23,7 +23,7 @@ Every camera has it's own flaws, the result is a distortion of the output. The p
 In [2], chessboard images are used because they highly contrasted and also because of the regular shapes of the squares which makes the automatic detection of the squares corners easy. The OpenCV function **cv2.findChessboardCorners** automatically detects the corners, feeding them to **cv2.calibrateCamera** in [3] gives us the distortion matrix and calibration coefficients.
 
 The **cv2.undistort** function is used to undistort the images using the previously calculated coefficients
-![alt text](output_images\undistortion.png "Undistortion")
+![alt text](/output_images/undistortion.png "Undistortion")
 
 # Lane Detection Pipeline
 
@@ -42,16 +42,16 @@ The choice of **src** and **dst** points is very important as we don't want the 
 
 The perspective transform can also be used as a ** region of interest** function, a good choice of **dst** point (as close as possible to the edge of the image but still cover all the lane lines) will ommit the rest of the image and keep only the region that most likely contain pixels of the lane lines.
 
-![alt text](output_images\bird_view.png "Bird View")
+![alt text](/output_images/bird_view.png "Bird View")
 
 ### Binary images
 
 In [6] and [7] the RGB colored images are transformed to binary images using thresholding techniques of gradient and saturation. The gradient threshold is used a basic technique and saturation threshold is added to improve the yellow line detection and the overall detection in situation of shadow and road color change.  
 
-![alt text](output_images\sobel_hls.png "thresholding")
+![alt text](output_images/sobel_hls.png "thresholding")
 
 The combination of saturation and gradient thresholding is chosen after testing many other combinations, this one seemed to give the best result. The following images shows the result after a perspective transform.
-![alt text](output_images\preprocess.png "binary")
+![alt text](output_images/preprocess.png "binary")
 
 ### Lane lines detection
 
@@ -61,7 +61,7 @@ For this part, a sliding window technique is used to detect the pixels that are 
 In [13], the peaks of the histogram of the bottom of image helps detect the position of the lanes lines. After that, the algorithm goes vertically through the images and slides the window left and right to correct the postition of the lane line center. A polynomial fit is then used to extrapolate the lanes pixels. The following images are a visualisation of the process.
 
 
-![alt text](output_images\sliding.png "Sliding window")
+![alt text](output_images/sliding.png "Sliding window")
 
 ### Radius of curvature & position of the car
 
@@ -71,7 +71,7 @@ In the same function [13] , the polynomial fit is used to calculate the radius o
 
 In [16], the complete pipeline is implemented, the input is the raw images. The image is passed through all the previously mentioned processes. The last part of the pipeline uses the **cv2.fillPoly** function to draw the lane and the function **cv2.putText** to write the curvature radius and car position on the images.
 
-![alt text](output_images\final.png "Final result")
+![alt text](output_images/final.png "Final result")
 
 ### Video pipeline
 
