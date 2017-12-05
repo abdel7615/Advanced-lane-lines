@@ -40,7 +40,7 @@ In order to clearly detect the lane lines and to correctly measure the lane curv
 
 The choice of **src** and **dst** points is very important as we don't want the image to be distorted after transformation. The image with straight lane lines is chosen for this step in order to make the choice of **dst** points easier. The resulting image must have vertical lines in this case.
 
-The perspective transform can also be used as a ** region of interest** function, a good choice of **dst** point (as close as possible to the edge of the image but still cover all the lane lines) will ommit the rest of the image and keep only the region that most likely contain pixels of the lane lines.
+The perspective transform can also be used as a **region of interest** function, a good choice of **dst** point (as close as possible to the edge of the image but still cover all the lane lines) will ommit the rest of the image and keep only the region that most likely contain pixels of the lane lines.
 
 ![alt text](/output_images/bird_view.png "Bird View")
 
